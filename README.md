@@ -6,3 +6,11 @@ run:
 ```
 ./arspoof.py <ip_target> <ip_victim>
 ```
+install:
+```
+make install
+```
+uninstall:
+```
+make uninstall
+```
