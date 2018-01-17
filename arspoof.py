@@ -52,5 +52,6 @@ if (re.match(regex_ip, sys.argv[1]) == None or re.match(regex_ip, sys.argv[2]) =
 ip_1 = sys.argv[1]
 ip_2 = sys.argv[2]
 
+print("[\033[33m!\033[00m] Dont forget to enable forwarding: echo 1 > /proc/sys/net/ipv4/ip_forward")
 arspoof(ip_1, ip_2, regex_mac)
 clean()
