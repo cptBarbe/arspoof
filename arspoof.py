@@ -1,5 +1,12 @@
 #!/usr/bin/python2.7
 
+# *****************************	#
+#				#
+# Joseph vidal	2018	     	#
+# joseph.vidal@pitech.eu	#
+#				#
+# *****************************	#
+
 import os
 import sys
 import re
