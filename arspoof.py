@@ -20,6 +20,9 @@ from scapy.layers.inet import (
     srp
 )
 
+def printerr(msg):
+    os.write(2, msg);
+
 def get_mac(ip_1):
     print("[\033[32m+\033[00m] Getting mac address")
     arping = Ether(dst = ETHER_BROADCAST) / ARP(pdst = ip_1)
@@ -45,13 +48,13 @@ regex_ip = "([0-9]{1,3}\.){3}[0-9]{1,3}"
 regex_mac = "([0-9a-f]{2}\:){5}[0-9a-f]{2}"
 
 if (len(sys.argv) != 3 or sys.argv[1] == "-h"):
-    print("USAGE:\n\t./arspoof.py <ip_target> <ip_victim>")
+    printerr("USAGE:\n\t./arspoof.py <ip_target> <ip_victim>")
     exit(0)
 if (re.match(regex_ip, sys.argv[1]) == None or re.match(regex_ip, sys.argv[2]) == None):
-    os.write(2, "[\033[31m-\033[00m] Error: ip adress must match with the regular expression.\n")
+    printerr("[\033[31m-\033[00m] Error: ip adress must match with the regular expression.\n")
     exit(84)
 if (os.getuid() != 0):
-    os.write(2, "[\033[31m-\033[00m] The script must be run as root.\n")
+    printerr("[\033[31m-\033[00m] The script must be run as root.\n")
     exit(84)
 
 ip_1 = sys.argv[1]
